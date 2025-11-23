@@ -1,0 +1,76 @@
+<header class="gz-header" role="banner">
+  <div class="gz-shell">
+    <!-- Brand: big logo on the far left + name -->
+    <button
+      class="brand"
+      type="button"
+      routerLink="/home"
+      (click)="closeMenu()"
+      aria-label="Go to Home"
+    >
+      <img src="assets/logo.png" alt="GroundZero logo" class="brand-mark" />
+      <span class="brand-word">GroundZero</span>
+    </button>
+
+    <!-- Desktop nav -->
+    <nav class="capsule" aria-label="Primary navigation">
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a routerLink="/aboutus" routerLinkActive="active">About Us</a>
+      <a routerLink="/services" routerLinkActive="active">Services</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+    </nav>
+
+    <!-- Become a tutor (desktop) -->
+    <button
+      class="become-btn"
+      type="button"
+      routerLink="/tutor"
+      (click)="closeMenu()"
+    >
+      Become a Tutor
+    </button>
+
+    <!-- Burger (mobile) -->
+    <button
+      class="burger"
+      type="button"
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer-backdrop" *ngIf="isOpen" (click)="closeMenu()">
+    <div class="drawer-panel" (click)="$event.stopPropagation()">
+      <nav class="drawer-nav" aria-label="Mobile navigation">
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMenu()"
+          >Home</a
+        >
+        <a routerLink="/aboutus" routerLinkActive="active" (click)="closeMenu()"
+          >About Us</a
+        >
+        <a routerLink="/services" routerLinkActive="active" (click)="closeMenu()"
+          >Services</a
+        >
+        <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()"
+          >Contact Us</a
+        >
+        <a routerLink="/tutor" routerLinkActive="active" (click)="closeMenu()"
+          >Become a Tutor</a
+        >
+      </nav>
+    </div>
+  </div>
+</header>

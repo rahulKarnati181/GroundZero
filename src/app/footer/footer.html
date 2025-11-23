@@ -1,0 +1,71 @@
+<footer class="gz-footer" aria-label="Site footer">
+  <div class="footer-shell">
+    <div class="footer-grid">
+      <!-- Box 1: site nav -->
+      <section class="footer-cell footer-nav" aria-label="Footer navigation">
+        <a routerLink="/home">Home</a>
+        <a routerLink="/services">Services</a>
+        <a routerLink="/aboutus">About Us</a>
+        <a routerLink="/contact">Contact Us</a>
+        <a routerLink="/tutor">Become a Tutor</a>
+      </section>
+
+      <!-- Box 2: social + statement -->
+      <section class="footer-cell footer-social" aria-label="Social and apps">
+        <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+
+        <a
+          href="#"
+          class="play-link"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Get it on Google Play"
+        >
+          <img
+            src="assets/plays.png"
+            alt="Get it on Google Play"
+            class="play-badge"
+          />
+        </a>
+
+        <p class="countries">
+          We are open to the countries: US, Singapore, UK, Australia.
+        </p>
+      </section>
+
+      <!-- Box 3: address -->
+      <section class="footer-cell footer-address" aria-label="Address">
+        <p>Hyderabad</p>
+        <p>Telangana, India</p>
+      </section>
+
+      <!-- Box 4: phone + email -->
+      <section class="footer-cell footer-contact" aria-label="Contact details">
+        <a href="tel:+919876543210">+91 98765 43210</a>
+        <a href="mailto:hello@groundzero.com">hellogroundzero.com</a>
+      </section>
+
+      <!-- Bottom-left: graphic + copyright -->
+      <section class="footer-cell footer-meta" aria-label="Copyright">
+        <svg
+          class="footer-mark"
+          viewBox="0 0 200 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <!-- simple arrow shape, left center to top-right and bottom-right -->
+          <line x1="0" y1="60" x2="200" y2="0" stroke="#dad4f2" stroke-width="1" />
+          <line x1="0" y1="60" x2="200" y2="120" stroke="#dad4f2" stroke-width="1" />
+        </svg>
+        <p>© GroundZero {{ currentYear }}</p>
+      </section>
+
+      <!-- Bottom-right: huge brand logo -->
+      <section class="footer-cell footer-brand" aria-label="GroundZero logo">
+        <img src="assets/logo.png" alt="GroundZero" />
+      </section>
+    </div>
+  </div>
+</footer>

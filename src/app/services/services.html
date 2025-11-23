@@ -1,0 +1,203 @@
+<section class="services-hero">
+  <div class="shell">
+    <div class="hero-copy">
+      <p class="eyebrow">Programs & Delivery</p>
+      <h1>Curated learning pathways for every board and milestone.</h1>
+      <p class="lede">
+        From early literacy to board readiness, GroundZero services combine seasoned mentors, data-backed lesson
+        design and parent-first reporting. Start with a learning audit and we will craft the right blend of live, hybrid
+        and on-campus experiences.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" routerLink="/contact">Talk to an academic advisor</a>
+        <a class="btn ghost" routerLink="/tutor">Become a tutor</a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <img src="assets/tutorbook.avif" alt="" loading="lazy" />
+      <ul class="hero-stats">
+        <li *ngFor="let stat of heroStats">
+          <strong>{{ stat.value }}</strong>
+          <span>{{ stat.label }}</span>
+          <p>{{ stat.helper }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="services-offerings">
+  <div class="shell">
+    <header>
+      <p class="eyebrow">What we deliver</p>
+      <h2>1-to-1 programs for every board and grade.</h2>
+      <p>
+        Focused tuition for Classes 10–12 across CBSE, ICSE, IB and State boards, plus Olympiad support.
+      </p>
+    </header>
+
+    <div class="offering-grid">
+      <article *ngFor="let offer of offerings" [style.background]="offer.accent">
+        <div class="pill">{{ offer.grades }}</div>
+        <h3>{{ offer.title }}</h3>
+        <p class="format">{{ offer.format }}</p>
+        <p>{{ offer.description }}</p>
+      </article>
+    </div>
+
+    <!-- new CTA under the programs -->
+    <div class="offerings-cta">
+      <p>
+        All programs are available as live 1-to-1 sessions and small-group online classes, scheduled around your
+        school timetable.
+      </p>
+      <a class="btn primary" routerLink="/contact">Book a trial class</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="services-delivery">
+  <div class="shell">
+    <div class="copy">
+      <p class="eyebrow">Delivery Modes</p>
+      <h2>Choose how your child learns best.</h2>
+      <p>
+        Swap between modes each cycle, plug mentors into school timetables or host GroundZero pods on campus. Our
+        academics team calibrates progression across formats.
+      </p>
+    </div>
+
+    <div class="delivery-grid">
+      <article *ngFor="let mode of deliveryModes">
+        <h3>{{ mode.title }}</h3>
+        <p class="summary">{{ mode.summary }}</p>
+        <ul>
+          <li *ngFor="let point of mode.bullets">{{ point }}</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" aria-labelledby="pricing-title">
+  <div class="pricing-shell">
+    <header class="pricing-header">
+      <p class="eyebrow">Fees & plans</p>
+      <h2 id="pricing-title">Simple plans for every board.</h2>
+      <p class="pricing-tagline">
+        Pick the board, choose how long you want to stay with us, and keep full flexibility on subjects.
+      </p>
+
+      <div class="pricing-controls">
+        <div class="control-block">
+          <span class="control-label">Plan duration</span>
+          <select
+            class="pricing-select"
+            [value]="selectedDurationId"
+            (change)="onDurationChange($event)">
+            <option *ngFor="let d of durations" [value]="d.id">
+              {{ d.label }} · {{ d.note }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="pricing-grid">
+      <article
+        class="pricing-card"
+        *ngFor="let plan of trackPlans"
+        [ngStyle]="{ 'background-image': plan.accent }">
+
+        <header class="plan-header">
+          <p class="plan-tag">{{ plan.tag }}</p>
+          <h3 class="plan-name">{{ plan.name }}</h3>
+          <span class="plan-badge" *ngIf="plan.badge">{{ plan.badge }}</span>
+        </header>
+
+        <div class="plan-price">
+          <div class="price-main">
+            <span class="currency">₹</span>
+            <span class="amount">{{ getMonthlyPrice(plan) | number:'1.0-0' }}</span>
+            <span class="per">/ month</span>
+          </div>
+          <p class="price-note">
+            Billed as ₹{{ getTotalPrice(plan) | number:'1.0-0' }}
+            for {{ getCurrentDuration().months }} months
+          </p>
+        </div>
+
+        <p class="plan-desc">{{ plan.description }}</p>
+
+        <ul class="plan-features">
+          <li *ngFor="let f of plan.features">{{ f }}</li>
+        </ul>
+
+        <button
+          type="button"
+          class="plan-cta"
+          routerLink="/contact">
+          Book a trial call
+        </button>
+      </article>
+    </div>
+
+    <p class="pricing-footnote">
+      Prices in INR. GST extra as applicable. All plans include 1-to-1 doubt support and scheduled parent updates.
+    </p>
+  </div>
+</section>
+
+
+
+<section class="services-process">
+  <div class="shell">
+    <header>
+      <p class="eyebrow">How it works</p>
+      <h2>A transparent playbook with measurable milestones.</h2>
+    </header>
+
+    <ol class="process-list">
+      <li *ngFor="let step of process">
+        <span class="step-num">{{ step.step }}</span>
+        <div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.body }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="services-faq">
+  <div class="shell">
+    <header>
+      <p class="eyebrow">FAQs</p>
+      <h2>Still exploring?</h2>
+      <p>Here are the quick answers families ask before enrolling.</p>
+    </header>
+
+    <div class="faq-list">
+      <article *ngFor="let faq of faqs">
+        <h3>{{ faq.question }}</h3>
+        <p>{{ faq.answer }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="services-cta">
+  <div class="shell">
+    <div class="cta-card">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Book a free learning audit.</h2>
+        <p>Share report cards, schedules and goals. We will respond with a custom pathway overview within 48 hours.</p>
+      </div>
+      <a class="btn primary" routerLink="/contact">Schedule a call</a>
+    </div>
+  </div>
+</section>

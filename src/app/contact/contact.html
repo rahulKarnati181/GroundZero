@@ -1,0 +1,277 @@
+<!-- HERO -->
+<header class="con-hero" aria-labelledby="con-title">
+  <div class="con-shell">
+    <div class="con-hero__copy" data-reveal>
+      <span class="eyebrow">Get in touch</span>
+      <h1 id="con-title" class="con-title">
+        Talk to a real teacher. Start with 3 free sessions.
+      </h1>
+      <p class="con-sub">
+        Personal mentorship, board-aligned plans, and measurable progress — built around your child.
+      </p>
+
+      <div class="con-quick">
+        <a class="q-pill" [href]="telHref(hotline)">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path
+              d="M3 5c0 8.3 6.7 15 15 15l2-3-4-3-2 2c-3-1-6-4-7-7l2-2-3-4-3 2z"
+              fill="currentColor"
+            />
+          </svg>
+          {{ hotline }}
+        </a>
+
+        <a class="q-pill" [href]="mailHref(mailto)">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" />
+          </svg>
+          {{ mailto }}
+        </a>
+
+        <a class="q-pill" [href]="whatsapp" target="_blank" rel="noopener">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M13.6 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"
+            />
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <button class="cta" type="button" (click)="scrollToForm()">Book the free sessions</button>
+    </div>
+
+    <div class="con-hero__art" data-reveal>
+      <figure class="hero-card">
+        <img
+          src="assets/teachercont.jpg"
+          alt="Student and tutor working on a laptop"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption>Personal, board-aligned, and consistent.</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- CONTACT FORM + INFO -->
+<section class="con-main" aria-labelledby="enquiry-title">
+  <div class="con-shell con-grid">
+    <!-- form -->
+    <article id="enquiry" class="card form" data-reveal>
+      <h2 id="enquiry-title">Send an enquiry</h2>
+
+      <form #f="ngForm" (ngSubmit)="submit(f)" novalidate>
+        <div class="row two">
+          <label class="field">
+            <span>Name</span>
+            <input name="name" [(ngModel)]="model.name" required autocomplete="name" />
+            <small class="err" *ngIf="f.submitted && !model.name">Required</small>
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input
+              name="email"
+              [(ngModel)]="model.email"
+              required
+              email
+              autocomplete="email"
+            />
+            <small class="err" *ngIf="f.submitted && !model.email">Enter a valid email</small>
+          </label>
+        </div>
+
+        <div class="row two">
+          <label class="field">
+            <span>Phone</span>
+            <input
+              name="phone"
+              [(ngModel)]="model.phone"
+              required
+              pattern="^[0-9+\s-]{8,}$"
+              autocomplete="tel"
+            />
+            <small class="err" *ngIf="f.submitted && !model.phone">Enter a valid number</small>
+          </label>
+
+          <label class="field select">
+            <span>Board</span>
+            <select name="board" [(ngModel)]="model.board">
+              <option>CBSE</option>
+              <option>ICSE</option>
+              <option>IGCSE</option>
+              <option>IB</option>
+              <option>State</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row three">
+          <label class="field select">
+            <span>Interest</span>
+            <select name="interest" [(ngModel)]="model.interest">
+              <option>Tutoring</option>
+              <option>Test Prep</option>
+              <option>Skill Building</option>
+            </select>
+          </label>
+
+          <label class="field select">
+            <span>Preferred contact</span>
+            <select name="preferredContact" [(ngModel)]="model.preferredContact">
+              <option>Email</option>
+              <option>Phone</option>
+              <option>WhatsApp</option>
+            </select>
+          </label>
+
+          <label class="field select">
+            <span>Best time</span>
+            <select name="time" [(ngModel)]="model.time">
+              <option>Morning</option>
+              <option>Afternoon</option>
+              <option>Evening</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="field field--full field--notes">
+          <span>Tell us a bit about the student</span>
+          <textarea
+            name="notes"
+            placeholder="Boards, grade, goals, topics..."
+            [(ngModel)]="model.notes"
+          ></textarea>
+          <small class="err" *ngIf="f.submitted && !model.notes">
+            Please share a few details.
+          </small>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" name="consent" [(ngModel)]="model.consent" />
+          <span>You can contact me about my enquiry</span>
+        </label>
+
+        <div class="actions">
+          <button class="cta" type="submit" [disabled]="loading">
+            <span *ngIf="!loading">Send enquiry</span>
+            <span
+              class="spinner"
+              *ngIf="loading"
+              aria-live="polite"
+              aria-busy="true"
+            ></span>
+          </button>
+          <p class="fine">Average response time under 2–4 hours on weekdays.</p>
+        </div>
+
+        <div class="toast" *ngIf="submitted" role="status" aria-live="polite">
+          Thanks. A program advisor will reach out soon.
+        </div>
+      </form>
+    </article>
+
+    <!-- contact info -->
+    <aside class="card info" data-reveal>
+      <div class="info-header">
+        <h3>Reach us</h3>
+        <p>Real tutors in Hyderabad, no call-centre scripts.</p>
+      </div>
+
+      <div class="info-section">
+        <h4>Contact</h4>
+        <ul class="reach">
+          <li>
+            <a [href]="telHref(hotline)">
+              <span class="reach-label">Call</span>
+              <span>{{ hotline }}</span>
+            </a>
+          </li>
+          <li>
+            <a [href]="mailHref(mailto)">
+              <span class="reach-label">Email</span>
+              <span>{{ mailto }}</span>
+            </a>
+          </li>
+          <li>
+            <a [href]="whatsapp" target="_blank" rel="noopener">
+              <span class="reach-label">WhatsApp</span>
+              <span>Chat now</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h4>Hours</h4>
+        <p>
+          Mon to Fri · 9:00–18:00 IST<br />
+          Sat · 10:00–14:00 IST
+        </p>
+      </div>
+
+      <div class="info-section locs">
+        <h4>Location</h4>
+        <ul>
+          <li *ngFor="let l of locations">
+            <div class="city">{{ l.city }}</div>
+            <div class="addr">
+              {{ l.line1 }}<br *ngIf="l.line2" />
+              {{ l.line2 }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-footer">
+        <p>Prefer WhatsApp? We usually reply in under 2 hours on weekdays.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- MAP STRIP -->
+<section class="con-map" aria-label="Map">
+  <div class="con-shell">
+    <div class="map-wrap" data-reveal>
+      <iframe
+        title="GroundZero Hyderabad"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.051!2d77.622!3d12.936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU2JzA5LjYiTiA3N8KwMzcnMTkuMiJF!5e0!3m2!1sen!2sin!4v0000000000"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="con-cta" aria-labelledby="con-cta-title">
+  <div class="con-shell">
+    <div class="con-cta-card">
+      <div class="con-cta-left">
+        <span class="con-cta-pill">Next step</span>
+        <h2 id="con-cta-title" class="con-cta-heading">
+          Start learning the GroundZero way.
+        </h2>
+        <p class="con-cta-sub">
+          3 Free Sessions · Personalized Mentorship · Expert Tutors
+        </p>
+      </div>
+
+      <div class="con-cta-right">
+        <button class="con-cta-btn" type="button" (click)="scrollToForm()">
+          Book Free Sessions
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
