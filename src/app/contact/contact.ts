@@ -20,30 +20,33 @@ type LocationCard = {
 export class ContactComponent implements AfterViewInit {
   constructor(private el: ElementRef<HTMLElement>) {}
 
-  // quick links & locations
+  // quick links and locations
   hotline = '+91 98 765 43210';
   mailto = 'hello@groundzero.edu';
   whatsapp = 'https://wa.me/919876543210';
 
   locations: LocationCard[] = [
-   
-    { city: 'Hyderabad', line1: 'Gachibowli, Financial District', line2: '500032', phone: this.hotline, email: this.mailto },
-   
+    {
+      city: 'Hyderabad',
+      line1: 'Gachibowli, Financial District',
+      line2: '500032',
+      phone: this.hotline,
+      email: this.mailto
+    }
   ];
 
   // form model
-model = {
-  name: '',
-  email: '',
-  phone: '',
-  board: 'CBSE',
-  interest: 'Tutoring',
-  preferredContact: 'Email',
-  time: 'Evening',
-  notes: '',
-  consent: true
-};
-
+  model = {
+    name: '',
+    email: '',
+    phone: '',
+    board: 'CBSE',
+    interest: 'Tutoring',
+    preferredContact: 'Email',
+    time: 'Evening',
+    notes: '',
+    consent: true
+  };
 
   loading = false;
   submitted = false;
@@ -51,10 +54,9 @@ model = {
   ngAfterViewInit(): void {
     const root = this.el.nativeElement;
 
-    // reveal-on-scroll
     const io = new IntersectionObserver(
-      es => {
-        for (const e of es) {
+      entries => {
+        for (const e of entries) {
           if (e.isIntersecting) {
             (e.target as HTMLElement).classList.add('is-in');
             io.unobserve(e.target);
@@ -63,6 +65,7 @@ model = {
       },
       { rootMargin: '0px 0px -15% 0px', threshold: 0.15 }
     );
+
     root.querySelectorAll<HTMLElement>('[data-reveal]').forEach(n => io.observe(n));
   }
 
@@ -76,19 +79,21 @@ model = {
       form.control.markAllAsTouched();
       return;
     }
+
     this.loading = true;
 
-    // simulate send
     setTimeout(() => {
       this.loading = false;
       this.submitted = true;
-
-      // dev/log
       console.log('Contact submission:', this.model);
     }, 900);
   }
 
-  // basic helpers
-  telHref(t: string): string { return 'tel:' + t.replace(/\s+/g, ''); }
-  mailHref(m: string): string { return 'mailto:' + m; }
+  telHref(t: string): string {
+    return 'tel:' + t.replace(/\s+/g, '');
+  }
+
+  mailHref(m: string): string {
+    return 'mailto:' + m;
+  }
 }

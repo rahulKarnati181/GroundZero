@@ -417,7 +417,7 @@
 	height: 420px;
 	border-radius: 999px;
 	padding: 26px;
-	background: radial-gradient(circle at 10% 0%,#ffe6ff 0,#fbd6ff 30%,#f9bfff 55%,#f9aaf4 100%);
+	background: radial-gradient(circle at 10% 0%,#114C5C 0,#114C5C 30%,#114C5C 55%,#114C5C 100%);
 	box-shadow: 0 34px 70px rgba(180,83,214,0.28);
 	display: flex;
 	align-items: center;
@@ -437,7 +437,7 @@
 	width: 250px;
 	height: 300px;
 	border-radius: 999px;
-	background: radial-gradient(circle at 50% 10%,#ffeefc,#f4a8ff 70%);
+	background: radial-gradient(circle at 50% 10%,#ffeefc,#114C5C 70%);
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
@@ -1455,3 +1455,243 @@
 	box-shadow: 0 8px 18px rgba(17,76,92,0.16);
 }
 
+@media (max-width: 768px) {
+  /* General section spacing */
+  .hero,
+  .how,
+  .programs,
+  .gz-switch,
+  .impact,
+  .talk,
+  .platform,
+  .faq {
+    padding-inline: 16px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 72px 0 32px;
+  }
+
+  .hero-wrap {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero-left {
+    max-width: 480px;
+  }
+
+  .hero-chips {
+    gap: 6px;
+  }
+
+  .cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cssbuttons-io-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-note {
+    font-size: 12px;
+    max-width: 28rem;
+  }
+
+  .trust {
+    gap: 10px;
+    font-size: 13px;
+  }
+
+  .hero-right {
+    justify-content: center;
+  }
+
+  .hero-form-card {
+    width: 100%;
+  }
+
+  .hero-cta-wide {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .why-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 56px 0 64px;
+  }
+
+  .how-wrap {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .how-orb {
+    width: 260px;
+    height: 340px;
+  }
+
+  .how-orb-inner {
+    width: 210px;
+    height: 260px;
+  }
+
+  .how-line {
+    display: none;
+  }
+
+  .how-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .how-step {
+    padding: 22px 18px 20px;
+  }
+
+  .how-step--3 {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  /* PROGRAMS */
+  .programs {
+    padding: 60px 0 52px;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* DIFFERENTIATORS */
+  .gz-switch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gz-switch-card {
+    padding: 18px 16px 18px;
+  }
+
+  /* IMPACT */
+  .impact {
+    padding: 64px 0 56px;
+  }
+
+  .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .impact-card {
+    padding: 18px 14px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .impact-icn {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  /* PARENT QUOTES */
+  .talk {
+    padding: 64px 0 56px;
+  }
+
+  .talk-track {
+    grid-template-columns: 1fr;
+  }
+
+  /* INTERACTIVE PLATFORM */
+  .platform {
+    padding: 60px 0;
+  }
+
+  .p-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p-card--main {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* FAQ */
+  .faq {
+    padding: 64px 0;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .faq-nav {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    gap: 8px;
+  }
+
+  .faq-tab {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+}
+@media (max-width: 768px) {
+  /* COMMUNITY / MOVEMENT SPLIT */
+  .community {
+    padding: 56px 0 64px;
+  }
+
+  .community-wrap {
+    width: min(640px, 92vw);
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .community-left {
+    max-width: 100%;
+  }
+
+  .community-lead {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .community-points {
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+  .community-cta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .community-right {
+    max-width: 420px;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .community-right .tile {
+    aspect-ratio: 3 / 2;
+    border-radius: 16px;
+  }
+}

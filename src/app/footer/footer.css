@@ -124,7 +124,6 @@
 }
 
 /* bottom-right: big logo */
-
 .footer-brand {
   grid-column: 2 / span 3;
   grid-row: 2;
@@ -135,11 +134,20 @@
   min-height: 220px;
 }
 
-.footer-brand img {
-  width: min(60%, 420px);
-  max-height: 220px;
+/* logo variants */
+
+.footer-logo {
   height: auto;
   display: block;
+}
+
+.footer-logo--desktop {
+  max-height: 220px;
+}
+
+.footer-logo--mobile {
+  display: none;
+  max-height: 80px; /* adjust as you like */
 }
 
 /* responsive */
@@ -177,4 +185,13 @@
   .footer-brand {
     justify-content: center;
   }
+
+  .footer-logo--desktop {
+    display: none;
+  }
+
+  .footer-logo--mobile {
+    display: block;
+  }
 }
+

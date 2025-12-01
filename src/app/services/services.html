@@ -31,12 +31,13 @@
 <section class="services-offerings">
   <div class="shell">
     <header>
-      <p class="eyebrow">What we deliver</p>
-      <h2>1-to-1 programs for every board and grade.</h2>
-      <p>
-        Focused tuition for Classes 10–12 across CBSE, ICSE, IB and State boards, plus Olympiad support.
-      </p>
-    </header>
+  <p class="eyebrow">What we deliver</p>
+  <h2>1-to-1 programs from Class 6 to competitive exams.</h2>
+  <p>
+    Structured pathways for Classes 6-12 across CBSE, ICSE, IB and State boards, plus focused tracks for JEE, NEET, SAT and CUET.
+  </p>
+</header>
+
 
     <div class="offering-grid">
       <article *ngFor="let offer of offerings" [style.background]="offer.accent">
@@ -95,13 +96,16 @@
         <div class="control-block">
           <span class="control-label">Plan duration</span>
           <select
-            class="pricing-select"
-            [value]="selectedDurationId"
-            (change)="onDurationChange($event)">
-            <option *ngFor="let d of durations" [value]="d.id">
-              {{ d.label }} · {{ d.note }}
-            </option>
-          </select>
+  class="pricing-select"
+  (change)="onDurationChange($event)">
+  <option
+    *ngFor="let d of durations"
+    [value]="d.id"
+    [selected]="d.id === selectedDurationId">
+    {{ d.label }} · {{ d.note }}
+  </option>
+</select>
+
         </div>
       </div>
     </header>

@@ -67,115 +67,144 @@
   <div class="con-shell con-grid">
     <!-- form -->
     <article id="enquiry" class="card form" data-reveal>
-      <h2 id="enquiry-title">Send an enquiry</h2>
+      <header class="form-header">
+        <h2 id="enquiry-title">Send an enquiry</h2>
+      </header>
 
       <form #f="ngForm" (ngSubmit)="submit(f)" novalidate>
-        <div class="row two">
-          <label class="field">
-            <span>Name</span>
-            <input name="name" [(ngModel)]="model.name" required autocomplete="name" />
-            <small class="err" *ngIf="f.submitted && !model.name">Required</small>
+        <div class="form-layout">
+          <!-- block 1: identity -->
+          <div class="form-block">
+            <div class="row two">
+              <label class="field">
+                <span>Name</span>
+                <input
+                  name="name"
+                  [(ngModel)]="model.name"
+                  required
+                  autocomplete="name"
+                />
+                <small class="err" *ngIf="f.submitted && !model.name">Required</small>
+              </label>
+
+              <label class="field">
+                <span>Email</span>
+                <input
+                  name="email"
+                  [(ngModel)]="model.email"
+                  required
+                  email
+                  autocomplete="email"
+                />
+                <small class="err" *ngIf="f.submitted && !model.email">
+                  Enter a valid email
+                </small>
+              </label>
+            </div>
+
+            <div class="row two">
+              <label class="field">
+                <span>Phone</span>
+                <input
+                  name="phone"
+                  [(ngModel)]="model.phone"
+                  required
+                  pattern="^[0-9+\s-]{8,}$"
+                  autocomplete="tel"
+                />
+                <small class="err" *ngIf="f.submitted && !model.phone">
+                  Enter a valid number
+                </small>
+              </label>
+
+              <label class="field select">
+                <span>Board</span>
+                <select name="board" [(ngModel)]="model.board">
+                  <option>CBSE</option>
+                  <option>ICSE</option>
+                  <option>IGCSE</option>
+                  <option>IB</option>
+                  <option>State</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- block 2: preferences -->
+          <div class="form-block">
+            <div class="row three">
+              <label class="field select">
+                <span>Interest</span>
+                <select name="interest" [(ngModel)]="model.interest">
+                  <option>Tutoring</option>
+                  <option>Test Prep</option>
+                  <option>Skill Building</option>
+                </select>
+              </label>
+
+              <label class="field select">
+                <span>Preferred contact</span>
+                <select
+                  name="preferredContact"
+                  [(ngModel)]="model.preferredContact"
+                >
+                  <option>Email</option>
+                  <option>Phone</option>
+                  <option>WhatsApp</option>
+                </select>
+              </label>
+
+              <label class="field select">
+                <span>Best time</span>
+                <select name="time" [(ngModel)]="model.time">
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                  <option>Evening</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- block 3: notes -->
+          <div class="form-block form-block-notes">
+            <div class="field field--full field--notes">
+              <span>Tell us a bit about the student</span>
+              <textarea
+                name="notes"
+                placeholder="Boards, grade, goals, topics..."
+                [(ngModel)]="model.notes"
+              ></textarea>
+              <small class="err" *ngIf="f.submitted && !model.notes">
+                Please share a few details.
+              </small>
+            </div>
+          </div>
+
+          <!-- consent -->
+          <label class="check">
+            <input type="checkbox" name="consent" [(ngModel)]="model.consent" />
+            <span>You can contact me about my enquiry</span>
           </label>
 
-          <label class="field">
-            <span>Email</span>
-            <input
-              name="email"
-              [(ngModel)]="model.email"
-              required
-              email
-              autocomplete="email"
-            />
-            <small class="err" *ngIf="f.submitted && !model.email">Enter a valid email</small>
-          </label>
-        </div>
+          <!-- actions -->
+          <div class="actions">
+            <button class="cta" type="submit" [disabled]="loading">
+              <span *ngIf="!loading">Send enquiry</span>
+              <span
+                class="spinner"
+                *ngIf="loading"
+                aria-live="polite"
+                aria-busy="true"
+              ></span>
+            </button>
+            <p class="fine">
+              Average response time under 2–4 hours on weekdays.
+            </p>
+          </div>
 
-        <div class="row two">
-          <label class="field">
-            <span>Phone</span>
-            <input
-              name="phone"
-              [(ngModel)]="model.phone"
-              required
-              pattern="^[0-9+\s-]{8,}$"
-              autocomplete="tel"
-            />
-            <small class="err" *ngIf="f.submitted && !model.phone">Enter a valid number</small>
-          </label>
-
-          <label class="field select">
-            <span>Board</span>
-            <select name="board" [(ngModel)]="model.board">
-              <option>CBSE</option>
-              <option>ICSE</option>
-              <option>IGCSE</option>
-              <option>IB</option>
-              <option>State</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="row three">
-          <label class="field select">
-            <span>Interest</span>
-            <select name="interest" [(ngModel)]="model.interest">
-              <option>Tutoring</option>
-              <option>Test Prep</option>
-              <option>Skill Building</option>
-            </select>
-          </label>
-
-          <label class="field select">
-            <span>Preferred contact</span>
-            <select name="preferredContact" [(ngModel)]="model.preferredContact">
-              <option>Email</option>
-              <option>Phone</option>
-              <option>WhatsApp</option>
-            </select>
-          </label>
-
-          <label class="field select">
-            <span>Best time</span>
-            <select name="time" [(ngModel)]="model.time">
-              <option>Morning</option>
-              <option>Afternoon</option>
-              <option>Evening</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="field field--full field--notes">
-          <span>Tell us a bit about the student</span>
-          <textarea
-            name="notes"
-            placeholder="Boards, grade, goals, topics..."
-            [(ngModel)]="model.notes"
-          ></textarea>
-          <small class="err" *ngIf="f.submitted && !model.notes">
-            Please share a few details.
-          </small>
-        </div>
-
-        <label class="check">
-          <input type="checkbox" name="consent" [(ngModel)]="model.consent" />
-          <span>You can contact me about my enquiry</span>
-        </label>
-
-        <div class="actions">
-          <button class="cta" type="submit" [disabled]="loading">
-            <span *ngIf="!loading">Send enquiry</span>
-            <span
-              class="spinner"
-              *ngIf="loading"
-              aria-live="polite"
-              aria-busy="true"
-            ></span>
-          </button>
-          <p class="fine">Average response time under 2–4 hours on weekdays.</p>
-        </div>
-
-        <div class="toast" *ngIf="submitted" role="status" aria-live="polite">
-          Thanks. A program advisor will reach out soon.
+          <div class="toast" *ngIf="submitted" role="status" aria-live="polite">
+            Thanks. A program advisor will reach out soon.
+          </div>
         </div>
       </form>
     </article>
@@ -233,11 +262,12 @@
       </div>
 
       <div class="info-footer">
-        <p>Prefer WhatsApp? We usually reply in under 2 hours on weekdays.</p>
+        <p>Prefer WhatsApp? We usually reply in under 2-4 hours on weekdays.</p>
       </div>
     </aside>
   </div>
 </section>
+
 
 <!-- MAP STRIP -->
 <section class="con-map" aria-label="Map">

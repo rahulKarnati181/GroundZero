@@ -68,39 +68,32 @@ export class ServicesComponent {
   ];
 
   offerings: Offering[] = [
-    {
-      title: 'Board Booster',
-      grades: 'Class 10',
-      format: '1-to-1 & small-group · all subjects',
-      description:
-        'Concept repair plus exam practice for Class 10 across CBSE, ICSE and State boards. Weekly tests, past-paper drills and structured doubt-clearing.',
-      accent: 'linear-gradient(135deg, #fdf3ff, #f7e6ff)'
-    },
-    {
-      title: 'Senior School Jumpstart',
-      grades: 'Class 11',
-      format: '1-to-1 & group · stream-focused',
-      description:
-        'Subject-wise mentoring for Science, Commerce and Humanities. Smooth transition into senior school with strong fundamentals for boards and entrances.',
-      accent: 'linear-gradient(135deg, #ecf5ff, #e0f0ff)'
-    },
-    {
-      title: 'Board Excellence',
-      grades: 'Class 12',
-      format: 'High-intent 1-to-1 tuition',
-      description:
-        'Intensive Class 12 preparation mapped to CBSE, ICSE and State patterns. Custom plans around school timetable, pre-boards and final board exams.',
-      accent: 'linear-gradient(135deg, #fef7ec, #fff1df)'
-    },
-    {
-      title: 'Olympiad & IB Enrichment',
-      grades: 'Olympiads · IB',
-      format: '1-to-1 tuition · extension track',
-      description:
-        'Higher-order problem solving for Math, Science and English Olympiads, plus IB HL/SL support for learners aiming beyond school exams.',
-      accent: 'linear-gradient(135deg, #edfdf7, #daffef)'
-    }
-  ];
+  {
+    title: 'Middle & High School Foundation',
+    grades: 'Classes 6-10',
+    format: '1-to-1 & small-group · all subjects',
+    description:
+      'Board-aligned support for Classes 6-10 across CBSE, ICSE, State and IB. We repair gaps from earlier grades, keep pace with school, and build exam habits through weekly practice and doubt clearing.',
+    accent: 'linear-gradient(135deg, #fdf3ff, #f7e6ff)'
+  },
+  {
+    title: 'Senior School Board Track',
+    grades: 'Classes 11-12',
+    format: '1-to-1 & group · streams and boards',
+    description:
+      'Stream-wise mentoring for Science, Commerce and Humanities across CBSE, ICSE, State and IB. Strong focus on board blueprints, long-answer writing, numericals and revision cycles around school tests.',
+    accent: 'linear-gradient(135deg, #ecf5ff, #e0f0ff)'
+  },
+  {
+    title: 'Competitive Exam Studio',
+    grades: 'JEE · NEET · SAT · CUET',
+    format: 'Boards + entrance prep',
+    description:
+      'Problem solving labs layered on top of board work. High-yield question sets, timed mocks and analysis for JEE, NEET, SAT and CUET, with structured doubt windows and exam-temperament coaching.',
+    accent: 'linear-gradient(135deg, #f3f4ff, #e4e7ff)'
+  }
+];
+
 
   deliveryModes: DeliveryMode[] = [
     {
@@ -177,7 +170,7 @@ export class ServicesComponent {
     {
       id: 'cbse',
       name: 'CBSE Track',
-      tag: 'Classes 8–12',
+      tag: 'Classes 6–12',
       badge: 'Most chosen',
       description: 'Aligned to NCERT and school schedule. Strong focus on board pattern and exam papers.',
       baseMonthly: 3800,
@@ -191,7 +184,7 @@ export class ServicesComponent {
     {
       id: 'icse',
       name: 'ICSE Track',
-      tag: 'Classes 8–12',
+      tag: 'Classes 6–12',
       description: 'Depth-first approach for language-heavy ICSE syllabus and long-form answers.',
       baseMonthly: 4000,
       accent: 'linear-gradient(135deg,#ecf5ff,#e0f4ff)',
@@ -204,7 +197,7 @@ export class ServicesComponent {
     {
       id: 'ib',
       name: 'IB / IGCSE Track',
-      tag: 'MYP · DP · IGCSE',
+      tag: 'Classes 6–12',
       badge: 'Intensive',
       description: 'IB-style questioning, IA guidance and higher-order problem solving with global benchmarks.',
       baseMonthly: 5500,
@@ -218,7 +211,7 @@ export class ServicesComponent {
     {
       id: 'state',
       name: 'State Board Track',
-      tag: 'AP · TS · KA & more',
+      tag: 'All States',
       description: 'Mapped to state textbooks with emphasis on scoring patterns and diagrams.',
       baseMonthly: 3200,
       accent: 'linear-gradient(135deg,#edfdf7,#daffef)',
@@ -231,7 +224,7 @@ export class ServicesComponent {
     {
       id: 'competitive',
       name: 'Competitive Prep Add-on',
-      tag: 'JEE · NEET · CUET',
+      tag: 'JEE · NEET · SAT',
       description: 'Problem-solving layer on top of boards for entrance-focused learners.',
       baseMonthly: 4800,
       accent: 'linear-gradient(135deg,#f3f4ff,#e4e7ff)',
@@ -256,9 +249,9 @@ export class ServicesComponent {
     const duration = this.getCurrentDuration();
     return this.getMonthlyPrice(plan) * duration.months;
   }
-
-  onDurationChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    this.selectedDurationId = target.value;
-  }
+onDurationChange(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  this.selectedDurationId = target.value;
+}
+ 
 }

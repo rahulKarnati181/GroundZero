@@ -58,9 +58,8 @@
   height: 60px;
   border-radius: 18px;
   object-fit: contain;
-  background: #ffffff;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+
+  
 }
 
 .brand-word {
