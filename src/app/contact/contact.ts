@@ -1,6 +1,7 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import * as emailjs from '@emailjs/browser';
 
 type LocationCard = {
   city: string;
@@ -20,7 +21,7 @@ type LocationCard = {
 export class ContactComponent implements AfterViewInit {
   constructor(private el: ElementRef<HTMLElement>) {}
 
-  // quick links and locations
+  // quick links & locations
   hotline = '+91 98 765 43210';
   mailto = 'hello@groundzero.edu';
   whatsapp = 'https://wa.me/919876543210';
@@ -35,7 +36,7 @@ export class ContactComponent implements AfterViewInit {
     }
   ];
 
-  // form model
+  // form model (same fields as in HTML)
   model = {
     name: '',
     email: '',
@@ -48,8 +49,14 @@ export class ContactComponent implements AfterViewInit {
     consent: true
   };
 
+  // EmailJS config – put your real IDs here
+  private serviceID = 'ser';
+  private templateID = 'te';
+  private publicKey  = '7sG';
+
   loading = false;
   submitted = false;
+  errorMsg = '';
 
   ngAfterViewInit(): void {
     const root = this.el.nativeElement;
@@ -65,7 +72,6 @@ export class ContactComponent implements AfterViewInit {
       },
       { rootMargin: '0px 0px -15% 0px', threshold: 0.15 }
     );
-
     root.querySelectorAll<HTMLElement>('[data-reveal]').forEach(n => io.observe(n));
   }
 
@@ -74,25 +80,55 @@ export class ContactComponent implements AfterViewInit {
     node?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  submit(form: NgForm): void {
-    if (!form.valid) {
+  async submit(form: NgForm): Promise<void> {
+    if (form.invalid) {
       form.control.markAllAsTouched();
       return;
     }
 
     this.loading = true;
+    this.submitted = false;
+    this.errorMsg = '';
 
-    setTimeout(() => {
+    try {
+      await emailjs.send(
+        this.serviceID,
+        this.templateID,
+        {
+          from_name: this.model.name,
+          from_email: this.model.email,
+          phone: this.model.phone,
+          board: this.model.board,
+          interest: this.model.interest,
+          preferred_contact: this.model.preferredContact,
+          best_time: this.model.time,
+          notes: this.model.notes,
+          consent: this.model.consent ? 'Yes' : 'No'
+        },
+        this.publicKey
+      );
+
       this.loading = false;
       this.submitted = true;
-      console.log('Contact submission:', this.model);
-    }, 900);
+
+      // reset form with sensible defaults
+      form.resetForm({
+        board: 'CBSE',
+        interest: 'Tutoring',
+        preferredContact: 'Email',
+        time: 'Evening',
+        consent: true
+      });
+    } catch (err) {
+      console.error('EmailJS error (contact form):', err);
+      this.loading = false;
+      this.errorMsg = 'Error sending form. Please try again.';
+    }
   }
 
   telHref(t: string): string {
     return 'tel:' + t.replace(/\s+/g, '');
   }
-
   mailHref(m: string): string {
     return 'mailto:' + m;
   }

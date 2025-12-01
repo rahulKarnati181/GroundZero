@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import * as emailjs from '@emailjs/browser';
 
 type Mode = 'Online' | 'Home' | 'Both';
 
@@ -37,7 +38,6 @@ interface ApplyForm {
   resume: File | null;
   consent: boolean;
 }
-
 @Component({
   selector: 'app-tutor',
   standalone: true,
@@ -47,9 +47,7 @@ interface ApplyForm {
 })
 export class TutorComponent {
   // modal state
-
-  // Add to TutorComponent if missing
-needHues: number[] = [272, 208, 228, 196, 312];
+  needHues: number[] = [272, 208, 228, 196, 312];
 
   isApplyOpen = false;
 
@@ -84,6 +82,11 @@ needHues: number[] = [272, 208, 228, 196, 312];
   // inline error messages
   errors: ErrorBag = {};
 
+  // EmailJS config for tutor applications
+  private serviceID = 'serv';       // your tutor service ID
+  private templateID = 'temp';     // your tutor template ID
+  private publicKey  = '7sG';     // same public key as other forms
+
   /* ---------- Modal controls ---------- */
   openApply(): void { this.isApplyOpen = true; }
   closeApply(): void { this.isApplyOpen = false; }
@@ -112,26 +115,59 @@ needHues: number[] = [272, 208, 228, 196, 312];
     this.form.resume = input.files && input.files[0] ? input.files[0] : null;
   }
 
-  
-  /* ---------- Submit + validation ---------- */
-  submit(ev: Event): void {
+  /* ---------- Submit + validation + EmailJS ---------- */
+  async submit(ev: Event): Promise<void> {
     ev.preventDefault();
     this.errors = this.validate();
     if (Object.keys(this.errors).length) {
-      // keep modal open and show inline messages
       return;
     }
 
-    // success stub
     const payload = {
-      ...this.form,
-      subjects: Array.from(this.form.subjects),
-      boards: Array.from(this.form.boards)
+      name: this.form.name,
+      phone: this.form.phone,
+      email: this.form.email,
+      city: this.form.city,
+      subjects: Array.from(this.form.subjects).join(', '),
+      boards: Array.from(this.form.boards).join(', '),
+      mode: this.form.mode,
+      years: this.form.years ?? '',
+      consent: this.form.consent ? 'Yes' : 'No',
+      resume_name: this.form.resume ? this.form.resume.name : 'Not attached'
     };
-    console.log('Tutor application:', payload);
 
-    // close and optionally reset lightweight fields
-    this.closeApply();
+    try {
+      await emailjs.send(
+        this.serviceID,
+        this.templateID,
+        payload,
+        this.publicKey
+      );
+
+      console.log('Tutor application sent:', payload);
+      this.resetForm();
+      this.closeApply();
+      alert('Application submitted');
+    } catch (err) {
+      console.error('EmailJS tutor error:', err);
+      this.errors.form = 'Error sending application. Please try again.';
+    }
+  }
+
+  private resetForm(): void {
+    this.form = {
+      name: '',
+      phone: '',
+      email: '',
+      city: '',
+      subjects: new Set<string>(),
+      boards: new Set<string>(),
+      mode: '',
+      years: null,
+      resume: null,
+      consent: false
+    };
+    this.errors = {};
   }
 
   private validate(): ErrorBag {

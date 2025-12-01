@@ -65,85 +65,127 @@
 
     <!-- RIGHT: enquiry form (smaller, with glow) -->
     <div class="hero-right">
-      <div class="hero-form-card">
-        <h2 class="hero-form-title">Send an enquiry</h2>
+  <div class="hero-form-card">
+    <h2 class="hero-form-title">Send an enquiry</h2>
 
-        <form class="hero-form" (submit)="submitLead($event)">
-          <div class="hero-form-grid">
-            <label class="hf-field">
-              <span>Name</span>
-              <input type="text" name="name" required>
-            </label>
+    <form
+      class="hero-form"
+      #heroForm="ngForm"
+      (ngSubmit)="submitLead(heroForm)"
+      novalidate
+    >
+      <div class="hero-form-grid">
+        <label class="hf-field">
+          <span>Name</span>
+          <input
+            type="text"
+            name="name"
+            required
+            [(ngModel)]="model.name"
+          >
+        </label>
 
-            <label class="hf-field">
-              <span>Email</span>
-              <input type="email" name="email">
-            </label>
+        <label class="hf-field">
+          <span>Email</span>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="model.email"
+          >
+        </label>
 
-            <label class="hf-field">
-              <span>Phone</span>
-              <input type="tel" name="phone">
-            </label>
+        <label class="hf-field">
+          <span>Phone</span>
+          <input
+            type="tel"
+            name="phone"
+            [(ngModel)]="model.phone"
+          >
+        </label>
 
-            <label class="hf-field">
-              <span>Board</span>
-              <select name="board">
-                <option value="" disabled selected hidden>Select board</option>
-                <option>CBSE</option>
-                <option>ICSE</option>
-                <option>IB</option>
-                <option>IGCSE</option>
-                <option>State</option>
-              </select>
-            </label>
+        <label class="hf-field">
+          <span>Board</span>
+          <select
+            name="board"
+            [(ngModel)]="model.board"
+          >
+            <option value="" disabled>Select board</option>
+            <option>CBSE</option>
+            <option>ICSE</option>
+            <option>IB</option>
+            <option>IGCSE</option>
+            <option>State</option>
+          </select>
+        </label>
 
-            <label class="hf-field">
-              <span>Interest</span>
-              <select name="interest">
-                <option>School Tuitions</option>
-                <option>Competitive exams</option>
-                <option>Foundation / basics</option>
-              </select>
-            </label>
+        <label class="hf-field">
+          <span>Interest</span>
+          <select
+            name="interest"
+            [(ngModel)]="model.interest"
+          >
+            <option>School Tuitions</option>
+            <option>Competitive exams</option>
+            <option>Foundation / basics</option>
+          </select>
+        </label>
 
-            <label class="hf-field">
-              <span>Preferred contact</span>
-              <select name="contact">
-                <option>Email</option>
-                <option>WhatsApp</option>
-                <option>Phone call</option>
-              </select>
-            </label>
+        <label class="hf-field">
+          <span>Preferred contact</span>
+          <select
+            name="contact"
+            [(ngModel)]="model.contact"
+          >
+            <option>Email</option>
+            <option>WhatsApp</option>
+            <option>Phone call</option>
+          </select>
+        </label>
 
-            <label class="hf-field">
-              <span>Best time</span>
-              <select name="time">
-                <option>Morning</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-              </select>
-            </label>
-          </div>
-
-          <label class="hf-field hf-textarea">
-            <span>Tell us a bit about the student</span>
-            <textarea
-              name="details"
-              rows="3"
-              placeholder="Boards, grade, goals, topics..."
-            ></textarea>
-          </label>
-
-          <label class="hf-consent">
-            <input type="checkbox" name="consent" checked>
-            <span>You can contact me about my enquiry</span>
-          </label>
-
-          <button type="submit" class="hf-submit">Send enquiry</button>
-          <p class="hf-note">Average response time under 2 hours on weekdays.</p>
-        </form>
+        <label class="hf-field">
+          <span>Best time</span>
+          <select
+            name="time"
+            [(ngModel)]="model.time"
+          >
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
+        </label>
       </div>
-    </div>
+
+      <label class="hf-field hf-textarea">
+        <span>Tell us a bit about the student</span>
+        <textarea
+          name="details"
+          rows="3"
+          placeholder="Boards, grade, goals, topics..."
+          [(ngModel)]="model.details"
+        ></textarea>
+      </label>
+
+      <label class="hf-consent">
+        <input
+          type="checkbox"
+          name="consent"
+          [(ngModel)]="model.consent"
+        >
+        <span>You can contact me about my enquiry</span>
+      </label>
+
+      <button
+        type="submit"
+        class="hf-submit"
+        [disabled]="heroForm.invalid"
+      >
+        Send enquiry
+      </button>
+      <p class="hf-note">Average response time under 2 hours on weekdays.</p>
+    </form>
+  </div>
+</div>
+
   </div>
 
   <p class="hero-cta-wide  ">
@@ -163,7 +205,7 @@
         <div class="how-orb-ring"></div>
         <div class="how-orb-inner">
           <!-- use your transparent boy image here -->
-          <img src="assets/boytr.png" alt="">
+          <img src="assets/girlth.png" alt="">
         </div>
 
         <span class="how-chip how-chip--top">E = mc²</span>

@@ -84,7 +84,6 @@
                   required
                   autocomplete="name"
                 />
-                <small class="err" *ngIf="f.submitted && !model.name">Required</small>
               </label>
 
               <label class="field">
@@ -92,13 +91,8 @@
                 <input
                   name="email"
                   [(ngModel)]="model.email"
-                  required
-                  email
                   autocomplete="email"
                 />
-                <small class="err" *ngIf="f.submitted && !model.email">
-                  Enter a valid email
-                </small>
               </label>
             </div>
 
@@ -108,22 +102,18 @@
                 <input
                   name="phone"
                   [(ngModel)]="model.phone"
-                  required
-                  pattern="^[0-9+\s-]{8,}$"
                   autocomplete="tel"
                 />
-                <small class="err" *ngIf="f.submitted && !model.phone">
-                  Enter a valid number
-                </small>
               </label>
 
               <label class="field select">
                 <span>Board</span>
                 <select name="board" [(ngModel)]="model.board">
+                  <option value="" disabled selected hidden>Select board</option>
                   <option>CBSE</option>
                   <option>ICSE</option>
-                  <option>IGCSE</option>
                   <option>IB</option>
+                  <option>IGCSE</option>
                   <option>State</option>
                 </select>
               </label>
@@ -136,9 +126,9 @@
               <label class="field select">
                 <span>Interest</span>
                 <select name="interest" [(ngModel)]="model.interest">
-                  <option>Tutoring</option>
-                  <option>Test Prep</option>
-                  <option>Skill Building</option>
+                  <option>School Tuitions</option>
+                  <option>Competitive exams</option>
+                  <option>Foundation / basics</option>
                 </select>
               </label>
 
@@ -149,8 +139,8 @@
                   [(ngModel)]="model.preferredContact"
                 >
                   <option>Email</option>
-                  <option>Phone</option>
                   <option>WhatsApp</option>
+                  <option>Phone call</option>
                 </select>
               </label>
 
@@ -174,9 +164,6 @@
                 placeholder="Boards, grade, goals, topics..."
                 [(ngModel)]="model.notes"
               ></textarea>
-              <small class="err" *ngIf="f.submitted && !model.notes">
-                Please share a few details.
-              </small>
             </div>
           </div>
 
@@ -191,14 +178,14 @@
             <button class="cta" type="submit" [disabled]="loading">
               <span *ngIf="!loading">Send enquiry</span>
               <span
-                class="spinner"
-                *ngIf="loading"
-                aria-live="polite"
-                aria-busy="true"
-              ></span>
+              class="spinner"
+              *ngIf="loading"
+              aria-live="polite"
+              aria-busy="true"
+            ></span>
             </button>
             <p class="fine">
-              Average response time under 2–4 hours on weekdays.
+              Average response time under 2 hours on weekdays.
             </p>
           </div>
 

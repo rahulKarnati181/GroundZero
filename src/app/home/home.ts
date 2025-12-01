@@ -1,13 +1,13 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import * as emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -17,8 +17,57 @@ export class HomeComponent implements AfterViewInit {
   // hero bits
   boards = ['CBSE', 'ICSE', 'IGCSE', 'IB', 'State'];
 
-  submitLead(e: Event): void {
-    e.preventDefault();
+  // hero form model
+  model = {
+    name: '',
+    email: '',
+    phone: '',
+    board: '',
+    interest: 'School Tuitions',
+    contact: 'Email',
+    time: 'Morning',
+    details: '',
+    consent: true
+  };
+
+  // EmailJS config – replace with your real IDs
+  private serviceID = 'servi';
+  private templateID = 'tempzq';
+  private publicKey  = '7sG';
+
+  async submitLead(form: NgForm): Promise<void> {
+    if (form.invalid) return;
+
+    try {
+      await emailjs.send(
+        this.serviceID,
+        this.templateID,
+        {
+          from_name: this.model.name,
+          from_email: this.model.email,
+          phone: this.model.phone,
+          board: this.model.board,
+          interest: this.model.interest,
+          preferred_contact: this.model.contact,
+          best_time: this.model.time,
+          details: this.model.details,
+          consent: this.model.consent ? 'Yes' : 'No'
+        },
+        this.publicKey
+      );
+
+      alert('Submitted');
+      form.resetForm({
+        board: '',
+        interest: 'School Tuitions',
+        contact: 'Email',
+        time: 'Morning',
+        consent: true
+      });
+    } catch (err) {
+      console.error(err);
+      alert('Error sending form');
+    }
   }
 
   // FAQ tabs
@@ -31,7 +80,6 @@ export class HomeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const root = this.el.nativeElement;
 
-    // reveal on scroll for elements with [data-reveal]
     const revealIO = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
@@ -49,7 +97,6 @@ export class HomeComponent implements AfterViewInit {
       .querySelectorAll<HTMLElement>('[data-reveal]')
       .forEach(node => revealIO.observe(node));
 
-    // counters: impact block on home
     const impact = root.querySelector<HTMLElement>('.impact');
     if (impact) {
       const onceImpact = new IntersectionObserver(
@@ -65,7 +112,6 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
-  // counters
   private startCounters(container: HTMLElement): void {
     const nodes = Array.from(container.querySelectorAll<HTMLElement>('.num'));
     const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -87,7 +133,7 @@ export class HomeComponent implements AfterViewInit {
         continue;
       }
 
-      const intervalMs = 33; // ~30fps
+      const intervalMs = 33;
       const steps = Math.max(1, Math.round(duration / intervalMs));
       const stepInt = Math.max(1, Math.round(target / steps));
 
